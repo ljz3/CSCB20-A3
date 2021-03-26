@@ -1,0 +1,10 @@
+db:
+	login
+		username, password
+	person
+		username, name, type
+	grades
+		username, name, grade-name, mark
+	feedback
+		a, b, c, d,... username
+		

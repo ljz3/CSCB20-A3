@@ -4,7 +4,7 @@ db:
 	person
 		username, name, type
 	grades
-		username, name, Assid, mark
+		username,Assid, mark 		//name
 	feedback
 		a, b, c, d,... username
 	remark

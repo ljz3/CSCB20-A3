@@ -21,14 +21,18 @@
         <div class="body-container">
             <div class="row-container">
                 <div>Username</div>
+                <div>Name</div>
                 <div>Assignment</div>
+                <div>Mark</div>
                 <div>Description</div>
                 <div>Remark</div>
             </div>
             {% for element in remarks %}
             <div class="row-container">
                 <div>{{element['Username']}}</div>
+                <div>{{element['Name']}}</div>
                 <div>{{element['Assignment']}}</div>
+                <div>{{element['Mark']}}</div>
                 <div>{{element['Description']}}</div>
                 <div><button>Remark</button></div>
             </div>

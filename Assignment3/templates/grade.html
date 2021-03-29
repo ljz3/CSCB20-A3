@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta charset="UTF-8">
+        <link rel="stylesheet" href="../css/login.css">
+        <title>Grade</title>
+    </head>
+    <body>
+        <div class="navbar-container">
+            <!-- Navbar links -->
+            <a href="index.html">Home</a>
+            <a href="assignments.html">Assignment</a>
+            <a href="syllabus.html">Syllabus</a>
+            <a href="piazza.html">Piazza</a>
+            <a href="labs.html">Labs</a>
+            <a href="markus.html">MarkUs</a>
+            <a href="courseteam.html">Course Team</a>
+            <a href="feedback.html">Feedback</a>
+        </div>
+        <div class="body-container">
+            <div class="form-container">
+                <!-- grades -->
+                <div class="row-container">
+                  <div>Assignments</div>
+                  <div>Marks</div>
+              </div>
+              {% for element in remarks %}
+              <div class="row-container">
+                  <div>{{element['Assignments']}}</div>
+                  <div>{{element['Marks']}}</div>
+              </div>
+              {% endfor %}
+            </div>
+        </div>
+
+        <footer class="foot">
+            <div class="footer-container">
+                <!-- Footer content -->
+                <div class="footer-content"><hr>This website was made as an assignment for the course CSCB20 at University of Toronto Scarborough Campus</div>
+                <div class="footer-content"><a href="https://web.cs.toronto.edu/" target="_blank">Faculty of Computer Science at UofT</a></div>
+                <div class="footer-content">Copyright&copy 2021. All Rights Reserved.</div>
+                <div class="footer-content">Made by Jawad Arshad, Jiazheng Li and Yuehai Zhou</div>
+            </div>
+        </footer>
+    </body>
+</html>

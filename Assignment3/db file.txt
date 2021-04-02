@@ -9,4 +9,3 @@ db:
 		a, b, c, d,... username
 	remark
 		username, name, Assid, mark, reason
-		

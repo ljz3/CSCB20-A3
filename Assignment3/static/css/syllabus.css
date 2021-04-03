@@ -1,0 +1,124 @@
+body {
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    background-color: #ecf0f1 ;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+
+.navbar-container {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    background-color: #2980b9;
+    position: fixed;
+    top: 0;
+    z-index: 9999;
+}
+
+
+.navbar-container a{
+    padding: 10px 20px;
+    text-decoration: none;
+    text-align: center;
+    color: #ecf0f1 ;
+    z-index: 9000;
+}
+
+.navbar-container a:hover {
+    background-color: #ecf0f1  ;
+    color: #2ecc71 ;
+    
+}
+
+
+/*-----------------------Body CSS-----------------------*/
+.body-container {
+    padding-top: 50px;
+    margin: 20px 50px;
+}
+
+.syllabus{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.syllabus a {
+    text-decoration: none;
+    padding: 10px;
+    border-radius: 15px;
+    color: #ecf0f1;
+    background-color: #2980b9;
+    transition: 1s;
+    cursor: pointer;
+}
+
+.syllabus a:hover {
+    background-color: #ecf0f1;
+    border: none;
+    color: #2ecc71;
+    border-radius: 15px;
+    box-shadow: 0 0 10px #2ecc71;
+    font-size: 20px;
+}
+
+
+/*-----------------------Footer CSS-----------------------*/
+
+.footer-container {
+    position: absolute;
+    width: 100%;
+    justify-content: center;
+    flex-flow: wrap;
+    bottom: 0;
+}
+
+.footer-container a{
+    text-decoration: none;
+    color: #2980b9;
+    
+}
+
+.footer-content{
+    padding: 10px 30px;
+    text-align: center;
+    text-decoration: none;
+    color: #2980b9;
+    
+}
+
+#break-line{
+    margin-block-end: 0em;
+}
+
+.footer-container a:hover {
+    color: #2ecc71 ;
+}
+
+
+
+@media screen and (max-width: 480px) {
+    .navbar-container {
+        size: 1%;
+        flex-direction: column; 
+        text-align: center;
+        position: relative;
+    }
+
+    .navbar-container a{
+        padding: 5px;
+    }
+
+    .footer-container{
+        flex-direction: column; 
+        text-align: center;
+    }
+
+    .body-container {
+        padding-top: 0px;
+        margin: 20px 30px;
+    }
+
+  }

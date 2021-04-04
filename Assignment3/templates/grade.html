@@ -3,7 +3,7 @@
     <head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta charset="UTF-8">
-        <link rel="stylesheet" href="../static/css/login.css">
+        <link rel="stylesheet" href="../static/css/index.css">
         <title>Grade</title>
     </head>
     <body>
@@ -25,14 +25,28 @@
                   <div>Assignments</div>
                   <div>Marks</div>
               </div>
-              {% for element in remarks %}
+              {% for element in grade %}
               <div class="row-container">
-                  <div>{{element['Assignments']}}</div>
-                  <div>{{element['Marks']}}</div>
+                  <div>{{element['Ass_id']}}</div>
+                  <div>{{element['Mark']}}</div>
               </div>
               {% endfor %}
             </div>
         </div>
+        <br>
+            <form action = "/grade">
+                <style>
+                    input{
+                        font-size: 14px;
+                        margin-left: 3.8%;
+                        margin-bottom: 13px;
+                    }
+                </style>
+
+                <input id="input_box" size="35"  type="text" name="Assignment" placeholder="Enter an assignment to search for">
+                <br>
+                <input type="submit" name="search_button" value="Search">
+            </form>
 
         <footer class="foot">
             <div class="footer-container">

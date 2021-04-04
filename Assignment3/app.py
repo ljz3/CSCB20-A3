@@ -43,5 +43,29 @@ def remark():
             remarks_dict.append(want_remark)
         db.close()
         return render_template('remark.html', remarks=remarks_dict)
+
+@app.route('/grade')
+def get_assid_grade():
+    db = get_db()
+    db.row_factory = make_dicts
+    Assid = request.args.get('Assignment')
+    if isadmin == True:
+        grade = query_db('select * from Grades where Username==' + access_username + 'and Ass_id==?' , [Assid], one=True)
+        db.close()
+        return render_template('grade.html', grade=[grade])
+
+
+@app.route('/')
+def remark():
+    db = get_db()
+    db.row_factory = make_dicts
+
+    grades = []
+    if isadmin == True:
+        for studentGrade in query_db('select * from Grades where Username==?' 
+                                                        ,[access_username]):
+            grades.append(studentGrade)
+        db.close()
+        return render_template('grade.html', grade=grades)
     
 

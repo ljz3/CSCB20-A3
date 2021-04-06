@@ -48,6 +48,7 @@ def remove_remark(user, ass_id, mark):
 def add_remark(user, name, ass_id, mark, reason):
     db = get_db()
     db_cur = db.cursor()
+    print("insert into Remarks values ('"+ user +"','"+ name +"','"+ ass_id +"','"+ mark +"','"+ reason +"')")
     db_cur.execute("insert into Remarks values ('"+ user +"','"+ name +"','"+ ass_id +"','"+ mark +"','"+ reason +"')")
     db.commit()
 
@@ -82,7 +83,6 @@ def remark_change():
                 ass_id = request.form.get('Ass_id')
                 mark = request.form.get('Mark')
                 reason = request.form.get('Reason')
-                print(("insert into Remarks values ('"+ user +"','"+ name +"','"+ ass_id +"','"+ mark +"','"+ reason +"')"))
                 add_remark(user, name, ass_id, mark, reason)
             return remark()
         else:

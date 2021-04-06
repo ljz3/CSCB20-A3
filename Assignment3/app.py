@@ -74,9 +74,11 @@ def login():
     if request.method=='POST':
         sql = """
 	    SELECT *
-	    FROM Login
+	    FROM Login NATURAL JOIN Person
 	    """
         results = query_db(sql, args=(), one=False)
         for result in results:
             if result[1]==request.form['Username']:
                 if result[2]==request.form['Password']:
+                       return render_template('grade.html', grade=grades)
+ 

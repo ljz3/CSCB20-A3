@@ -92,28 +92,34 @@ def remark_change():
 
 
 @app.route('/grade')
-def get_assid_grade():
-    db = get_db()
-    db.row_factory = make_dicts
-    Assid = request.args.get('Assignment')
-    if isadmin == True:
-        grade = query_db('select * from Grades where Username==' + access_username + 'and Ass_id==?' , [Assid], one=True)
-        db.close()
-        return render_template('grade.html', grade=[grade])
-
-
-@app.route('/')
 def grade():
     db = get_db()
     db.row_factory = make_dicts
-
+    Assid = request.args.get('Assignment')
     grades = []
-    if isadmin == True:
-        for studentGrade in query_db('select * from Grades where Username==?' 
-                                                        ,[access_username]):
-            grades.append(studentGrade)
-        db.close()
-        return render_template('grade.html', grade=grades)
+    grades_search=[]
+    print(Assid)
+    if Assid == None:
+        if isadmin == True:
+            for studentGrade in query_db('select * from Grades'):
+                grades.append(studentGrade)
+            db.close()
+            return render_template('grade.html', grade=grades, admin=isadmin)
+        else:
+            for studentGrade in query_db('select * from Grades where Username =? ' ,[access_username]):
+                grades.append(studentGrade)
+            db.close()
+            return render_template('grade.html', grade=grades)
+    else:
+        if isadmin == True:
+            for studentGrade in query_db('select * from Grades where Ass_id=?' , [Assid]):
+                grades.append(studentGrade)
+            db.close()
+            return render_template('grade.html', grade=grades, admin=isadmin)
+        else:
+            grade = query_db('select * from Grades where Username==? and Ass_id=?',[access_username,Assid], one=True)
+            db.close()
+            return render_template('grade.html', grade=[grade])
     
 
 @app.route('/login',methods=['GET','POST'])

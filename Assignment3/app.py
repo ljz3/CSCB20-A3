@@ -92,6 +92,7 @@ def remark_change():
 
 
 @app.route('/grade')
+@app.route('/grade.html')
 def grade():
     db = get_db()
     db.row_factory = make_dicts

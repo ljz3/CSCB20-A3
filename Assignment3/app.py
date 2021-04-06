@@ -32,7 +32,7 @@ def close_connection(exception):
     if db is not None:
         db.close()    
 
-@app.route('/remark')
+@app.route('/remark.html')
 def remark():
     db = get_db()
     db.row_factory = make_dicts
@@ -48,6 +48,11 @@ def remark():
             remarks_dict.append(want_remark)
         db.close()
         return render_template('remark.html', remarks=remarks_dict)
+    if request.method == 'POST':
+        if request.form['submit_button'] == 'Remark':
+            return render_template('home.html')
+            
+    
 
 
 @app.route('/grade')

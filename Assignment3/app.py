@@ -87,6 +87,7 @@ def login():
             if result[1]==request.form['Username']:
                 if result[2]==request.form['Password']:
                        return render_template('grade.html', grade=grades)
+<<<<<<< HEAD
 
 
 @app.route('/index.html')
@@ -121,3 +122,6 @@ def piazza():
 def syllabus():
     return render_template('syllabus.html')
 
+=======
+ 
+>>>>>>> 676cf59e5b47dce3c942be6cc74362198aacad61

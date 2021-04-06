@@ -45,7 +45,7 @@
                     {% if admin %}
                     <input type="hidden" name="Reason" id="Reason" value="{{element['Reason']}}">
                     <div class="content">{{element['Reason']}}</div>
-                    <input type="text" name="new_mark" value="new_mark">
+                    <input type="number" name="new_mark" value="0" min="0">
                     {% else %}
                     <input type="text" name="Reason" value="Reason">
                     {% endif %}

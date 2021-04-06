@@ -53,22 +53,29 @@ body {
     margin: 50px;
 }
 
+.row-container form{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+
+}
+
 .content {
     padding: 2%;
     margin: 5 px;
 }
 
-.content button{
+form input[type=submit]{
     text-decoration: none;
     border-radius: 15px;
     color: #ecf0f1;
     background-color: #2980b9;
     transition: 1s;
     cursor: pointer;
-    padding: 5px;
+    padding:  1% 4%;
 }
 
-.content button:hover{
+form input[type=submit]:hover{
     background-color: #ecf0f1;
     border: none;
     color: #2ecc71;

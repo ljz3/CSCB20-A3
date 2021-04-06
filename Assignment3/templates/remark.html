@@ -32,14 +32,14 @@
             </div>
             {% for element in remarks %}
             <div class="row-container">
-                <div class="content">{{element['Username']}}</div>
-                <div class="content">{{element['name']}}</div>
-                <div class="content">{{element['Ass_id']}}</div>
-                <div class="content">{{element['Mark']}}</div>
-                <div class="content">{{element['Reason']}}</div>
-                <div class="content">
-                    <input type="submit" name="submit_button" value="Remark">
-                </div>
+                <form action="/remark.html" method="post">
+                    <div class="content">{{element['Username']}}</div>
+                    <div class="content">{{element['name']}}</div>
+                    <div class="content">{{element['Ass_id']}}</div>
+                    <div class="content">{{element['Mark']}}</div>
+                    <div class="content">{{element['Reason']}}</div>
+                    <input type="submit" name="Remark" value="Remark"> 
+                </form>
             </div>
             {% endfor %}
 

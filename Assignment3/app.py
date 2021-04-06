@@ -56,7 +56,7 @@ def get_assid_grade():
 
 
 @app.route('/')
-def remark():
+def grade():
     db = get_db()
     db.row_factory = make_dicts
 
@@ -69,3 +69,14 @@ def remark():
         return render_template('grade.html', grade=grades)
     
 
+@app.route('/login',methods=['GET','POST'])
+def login():
+    if request.method=='POST':
+        sql = """
+	    SELECT *
+	    FROM Login
+	    """
+        results = query_db(sql, args=(), one=False)
+        for result in results:
+            if result[1]==request.form['Username']:
+                if result[2]==request.form['Password']:

@@ -33,11 +33,22 @@
             {% for element in remarks %}
             <div class="row-container">
                 <form action="/remark.html" method="post">
+                    <input type="hidden" name="Username" id="Username" value="{{element['Username']}}">
                     <div class="content">{{element['Username']}}</div>
+                    <input type="hidden" name="name" id="name" value="{{element['name']}}">
                     <div class="content">{{element['name']}}</div>
+                    <input type="hidden" name="Ass_id" id="Ass_id" value="{{element['Ass_id']}}">
                     <div class="content">{{element['Ass_id']}}</div>
+                    <input type="hidden" name="Mark" id="Mark" value="{{element['Mark']}}">
                     <div class="content">{{element['Mark']}}</div>
+                    
+                    {% if admin %}
+                    <input type="hidden" name="Reason" id="Reason" value="{{element['Reason']}}">
                     <div class="content">{{element['Reason']}}</div>
+                    <input type="text" name="new_mark" value="new_mark">
+                    {% else %}
+                    <input type="text" name="Reason" value="Reason">
+                    {% endif %}
                     <input type="submit" name="Remark" value="Remark"> 
                 </form>
             </div>

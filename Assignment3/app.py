@@ -7,6 +7,9 @@ app = Flask(__name__)
 access_username = ''
 isadmin = True
 
+#access_username = 'student_2'
+#isadmin = False
+
 def get_db():
     db = getattr(g, '_database', None)
     if db is None:
@@ -33,6 +36,19 @@ def close_connection(exception):
         db.close()    
 
 
+def remove_remark(user, ass_id, mark):
+    db = get_db()
+    db_cur = db.cursor()
+    db_cur.execute("delete from Remarks where Username='"+user+"' and Ass_id="+ass_id)
+    db_cur.execute("update Grades set Mark="+mark+"where Username='"+user+"' and Ass_id="+ass_id)
+    db.commit()
+
+def add_remark(user, name, ass_id, mark, reason):
+    db = get_db()
+    db_cur = db.cursor()
+    db_cur.execute("insert into Remarks values ('"+ user +"','"+ name +"','"+ ass_id +"','"+ mark +"','"+ reason +"')")
+    db.commit()
+
 def remark():
     db = get_db()
     db.row_factory = make_dicts
@@ -42,17 +58,30 @@ def remark():
         for want_remark in query_db('select * from Remarks'):
             remarks_dict.append(want_remark)
         db.close()
-        return render_template('remark.html', remarks=remarks_dict)
+        return render_template('remark.html', remarks=remarks_dict, admin=isadmin)
     else:
-        for want_remark in query_db('select * from Remarks where userneme =' + access_username):
+        for want_remark in query_db("select Username, name, Ass_id, Mark from Grades natural join Person where username ='" + access_username +"'"):
             remarks_dict.append(want_remark)
         db.close()
-        return render_template('remark.html', remarks=remarks_dict)
+        return render_template('remark.html', remarks=remarks_dict, admin=isadmin)
 
 @app.route('/remark.html', methods=['GET', 'POST'])
 def remark_change():           
     if request.method == 'POST':
         if request.form.get('Remark') == 'Remark':
+            if isadmin == True:
+                user = request.form.get('Username')
+                ass_id = request.form.get('Ass_id')
+                new_mark = request.form.get('new_mark')
+                remove_remark(user, ass_id, new_mark)
+            else:
+                user = request.form.get('Username')
+                name = request.form.get('name')
+                ass_id = request.form.get('Ass_id')
+                mark = request.form.get('Mark')
+                reason = request.form.get('Reason')
+                print(("insert into Remarks values ('"+ user +"','"+ name +"','"+ ass_id +"','"+ mark +"','"+ reason +"')"))
+                add_remark(user, name, ass_id, mark, reason)
             return remark()
         else:
             return remark()

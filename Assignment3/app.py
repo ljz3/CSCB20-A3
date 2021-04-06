@@ -127,4 +127,7 @@ def piazza():
 def syllabus():
     return render_template('syllabus.html')
 
+@app.route('/login.html')
+def loginpg():
+    return render_template('login.html')
  

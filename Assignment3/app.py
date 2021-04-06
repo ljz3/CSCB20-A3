@@ -32,7 +32,7 @@ def close_connection(exception):
     if db is not None:
         db.close()    
 
-@app.route('/remark.html')
+
 def remark():
     db = get_db()
     db.row_factory = make_dicts
@@ -48,11 +48,16 @@ def remark():
             remarks_dict.append(want_remark)
         db.close()
         return render_template('remark.html', remarks=remarks_dict)
+
+@app.route('/remark.html', methods=['GET', 'POST'])
+def remark_change():           
     if request.method == 'POST':
-        if request.form['submit_button'] == 'Remark':
-            return render_template('home.html')
-            
-    
+        if request.form.get('Remark') == 'Remark':
+            return remark()
+        else:
+            return remark()
+    else:
+        return remark()
 
 
 @app.route('/grade')
@@ -91,8 +96,7 @@ def login():
         for result in results:
             if result[1]==request.form['Username']:
                 if result[2]==request.form['Password']:
-                    isadmin = result[3]
-        return render_template('index.html')
+                       return render_template('grade.html', grade=grades)
 
 
 @app.route('/index.html')
@@ -127,7 +131,4 @@ def piazza():
 def syllabus():
     return render_template('syllabus.html')
 
-@app.route('/login.html')
-def loginpg():
-    return render_template('login.html')
  

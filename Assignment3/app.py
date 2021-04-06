@@ -39,8 +39,10 @@ def close_connection(exception):
 def remove_remark(user, ass_id, mark):
     db = get_db()
     db_cur = db.cursor()
-    db_cur.execute("delete from Remarks where Username='"+user+"' and Ass_id="+ass_id)
-    db_cur.execute("update Grades set Mark="+mark+"where Username='"+user+"' and Ass_id="+ass_id)
+    print("delete from Remarks where Username='"+user+"' and Ass_id='"+ass_id+"'")
+    db_cur.execute("delete from Remarks where Username='"+user+"' and Ass_id='"+ass_id+"'")
+    print("update Grades set Mark="+mark+"where Username='"+user+"' and Ass_id='"+ass_id+"'")
+    db_cur.execute("update Grades set Mark="+mark+" where Username='"+user+"' and Ass_id='"+ass_id+"'")
     db.commit()
 
 def add_remark(user, name, ass_id, mark, reason):

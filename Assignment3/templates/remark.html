@@ -3,7 +3,7 @@
     <head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta charset="UTF-8">
-        <link rel="stylesheet" href="../static/css/assignments.css">
+        <link rel="stylesheet" href="../static/css/remark.css">
         <title>Remark</title>
     </head>
     <body>
@@ -20,21 +20,21 @@
         </div>
         <div class="body-container">
             <div class="row-container">
-                <div>Username</div>
-                <div>Name</div>
-                <div>Assignment</div>
-                <div>Mark</div>
-                <div>Description</div>
-                <div>Remark</div>
+                <div class="content">Username</div>
+                <div class="content">Name</div>
+                <div class="content">Assignment</div>
+                <div class="content">Mark</div>
+                <div class="content">Description</div>
+                <div class="content">Remark</div>
             </div>
             {% for element in remarks %}
             <div class="row-container">
-                <div>{{element['Username']}}</div>
-                <div>{{element['name']}}</div>
-                <div>{{element['Ass_id']}}</div>
-                <div>{{element['Mark']}}</div>
-                <div>{{element['Reason']}}</div>
-                <div><button>Remark</button></div>
+                <div class="content">{{element['Username']}}</div>
+                <div class="content">{{element['name']}}</div>
+                <div class="content">{{element['Ass_id']}}</div>
+                <div class="content">{{element['Mark']}}</div>
+                <div class="content">{{element['Reason']}}</div>
+                <div class="content"><button>Remark</button></div>
             </div>
             {% endfor %}
 

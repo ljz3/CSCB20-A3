@@ -32,7 +32,7 @@ def close_connection(exception):
     if db is not None:
         db.close()    
 
-@app.route('/remark')
+@app.route('/remark.html')
 def remark():
     db = get_db()
     db.row_factory = make_dicts
@@ -43,6 +43,17 @@ def remark():
             remarks_dict.append(want_remark)
         db.close()
         return render_template('remark.html', remarks=remarks_dict)
+    else:
+        for want_remark in query_db('select * from Remarks where userneme =' + access_username):
+            remarks_dict.append(want_remark)
+        db.close()
+        return render_template('remark.html', remarks=remarks_dict)
+    if request.method == 'POST':
+        if request.form['submit_button'] == 'Remark':
+            return render_template('home.html')
+            
+    
+
 
 @app.route('/grade')
 def get_assid_grade():
@@ -82,4 +93,38 @@ def login():
                 if result[2]==request.form['Password']:
                     isadmin = result[3]
         return render_template('index.html')
+
+
+@app.route('/index.html')
+def home():
+    return render_template('index.html')
+
+@app.route('/assignments.html')
+def assignments():
+    return render_template('assignments.html')
+
+@app.route('/courseteam.html')
+def courseteam():
+    return render_template('courseteam.html')
+
+@app.route('/feedback.html')
+def feedback():
+    return render_template('feedback.html')
+
+@app.route('/labs.html')
+def labs():
+    return render_template('labs.html')
+
+@app.route('/markus.html')
+def markus():
+    return render_template('markus.html')
+
+@app.route('/piazza.html')
+def piazza():
+    return render_template('piazza.html')
+
+@app.route('/syllabus.html')
+def syllabus():
+    return render_template('syllabus.html')
+
  

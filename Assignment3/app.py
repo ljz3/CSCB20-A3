@@ -80,5 +80,6 @@ def login():
         for result in results:
             if result[1]==request.form['Username']:
                 if result[2]==request.form['Password']:
-                       return render_template('grade.html', grade=grades)
+                    isadmin = result[3]
+        return render_template('index.html')
  

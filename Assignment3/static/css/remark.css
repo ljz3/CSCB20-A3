@@ -9,6 +9,7 @@ body {
 
 .navbar-container {
     display: flex;
+    flex-wrap: wrap;
     width: 100%;
     justify-content: center;
     background-color: #2980b9;

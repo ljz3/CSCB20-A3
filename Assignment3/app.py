@@ -39,16 +39,16 @@ def close_connection(exception):
 def remove_remark(user, ass_id, mark):
     db = get_db()
     db_cur = db.cursor()
-    print("delete from Remarks where Username='"+user+"' and Ass_id='"+ass_id+"'")
+    #print("delete from Remarks where Username='"+user+"' and Ass_id='"+ass_id+"'")
     db_cur.execute("delete from Remarks where Username='"+user+"' and Ass_id='"+ass_id+"'")
-    print("update Grades set Mark="+mark+"where Username='"+user+"' and Ass_id='"+ass_id+"'")
+    #print("update Grades set Mark="+mark+"where Username='"+user+"' and Ass_id='"+ass_id+"'")
     db_cur.execute("update Grades set Mark="+mark+" where Username='"+user+"' and Ass_id='"+ass_id+"'")
     db.commit()
 
 def add_remark(user, name, ass_id, mark, reason):
     db = get_db()
     db_cur = db.cursor()
-    print("insert into Remarks values ('"+ user +"','"+ name +"','"+ ass_id +"','"+ mark +"','"+ reason +"')")
+    #print("insert into Remarks values ('"+ user +"','"+ name +"','"+ ass_id +"','"+ mark +"','"+ reason +"')")
     db_cur.execute("insert into Remarks values ('"+ user +"','"+ name +"','"+ ass_id +"','"+ mark +"','"+ reason +"')")
     db.commit()
 
@@ -156,9 +156,32 @@ def assignments():
 def courseteam():
     return render_template('courseteam.html')
 
-@app.route('/feedback.html')
+def add_feedback(name, like, dislike, see):
+    db = get_db()
+    db_cur = db.cursor()
+    #print("insert into Remarks values ('"+ user +"','"+ name +"','"+ ass_id +"','"+ mark +"','"+ reason +"')")
+    db_cur.execute("insert into Feedbacks values ('"+ name +"','"+ like +"','"+ dislike +"','"+ see +"')")
+    db.commit()
+
+@app.route('/feedback.html', methods=['GET','POST'])
 def feedback():
-    return render_template('feedback.html')
+    db = get_db()
+    db.row_factory = make_dicts
+    feedback_dict = []
+    if isadmin == True:
+        for want_remark in query_db('select * from Feedbacks'):
+            feedback_dict.append(want_remark)
+        db.close()
+        return render_template('feedback.html', feedbacks=feedback_dict, admin=isadmin)
+    else:
+        if request.method == 'POST':
+            if request.form.get('feedback') == 'Submit Feedback':
+                name = request.form.get('name')
+                like = request.form['like']
+                dislike = request.form['dislike']
+                see = request.form['see']
+                add_feedback(name, like, dislike, see)
+    return render_template('feedback.html', feedbacks=feedback_dict, admin=isadmin)
 
 @app.route('/labs.html')
 def labs():

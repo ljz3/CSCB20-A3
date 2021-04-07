@@ -134,18 +134,22 @@ def login():
     if request.method=='POST':
         if request.form.get("signup"):
             return render_template("signup.html")
-        sql = """
-	    SELECT *
-	    FROM Login NATURAL JOIN Person
-	    """
-        results = query_db(sql, args=(), one=False)
-        for result in results:
-            if result[1]==request.form['Username']:
-                if result[2]==request.form['Password']:
-                    return render_template('grade.html', grade=grades)
-                else:
-                    return render_template('index.html')
-    return render_template('login.html')
+        elif request.form.get("signin"):
+            return render_template("index.html")
+    elif request.method=='GET':
+        return render_template('login.html')
+    #     sql = """
+	#     SELECT *
+	#     FROM Login NATURAL JOIN Person
+	#     """
+    #     results = query_db(sql, args=(), one=False)
+    #     for result in results:
+    #         if result[1]==request.form['Username']:
+    #             if result[2]==request.form['Password']:
+    #                 return render_template('grade.html', grade=grades)
+    #             else:
+    #                 return render_template('index.html')
+    # return render_template('login.html')
         
 
 

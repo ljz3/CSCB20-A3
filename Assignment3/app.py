@@ -123,7 +123,7 @@ def grade():
             return render_template('grade.html', grade=[grade])
     
 
-@app.route('/login',methods=['GET','POST'])
+@app.route('/login.html',methods=['GET','POST'])
 def login():
     if request.method=='POST':
         sql = """
@@ -134,7 +134,9 @@ def login():
         for result in results:
             if result[1]==request.form['Username']:
                 if result[2]==request.form['Password']:
-                       return render_template('grade.html', grade=grades)
+                    return render_template('grade.html', grade=grades)
+                else:
+                    return render_template('index.html')
 
 
 @app.route('/index.html')

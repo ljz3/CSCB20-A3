@@ -25,11 +25,17 @@
             <div class="form-container">
                 <!-- grades -->
                 <div class="row-container">
-                  <h2><div class="content">Assignments</div></h2>
-                  <h2><div class="content">Marks</div></h2>
+                    {% if admin %}
+                        <h2><div class="content">Student Name</div></h2>
+                    {% endif %}
+                    <h2><div class="content">Assignments</div></h2>
+                    <h2><div class="content">Marks</div></h2>
               </div>
               {% for element in grade %}
               <div class="row-container">
+                {% if admin %}
+                    <div class="content">{{element['Username']}}</div>
+                {% endif %}
                   <div class="content">{{element['Ass_id']}}</div>
                   <div class="content">{{element['Mark']}}</div>
               </div>

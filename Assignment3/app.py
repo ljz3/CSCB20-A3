@@ -68,6 +68,11 @@ def remark():
         db.close()
         return render_template('remark.html', remarks=remarks_dict, admin=isadmin)
 
+@app.route('/')
+def default():
+    return render_template('login.html')
+
+
 @app.route('/remark.html', methods=['GET', 'POST'])
 def remark_change():           
     if request.method == 'POST':

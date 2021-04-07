@@ -25,25 +25,43 @@
             <div class="top-info">
                 <!-- header and text info on the feedback page -->
                 <h1>Leave your Feedback Below</h1>
-                <p class="main-text">What do you think of the course?<br>
-                   What do you want from the course?<br>
+                <p class="main-text">What did you like?<br>
+                    What did you dislike?<br>
                    Leave your thoughts below
                 </p>
-                <p class="note-text">
-                    ~AT THIS MOMENT THE SUBMIT BUTTON ISN'T CONNENTED TO ANYTHING~
-                </p>
             </div>
-            <div class="form-container">
-                <!-- a form to collect feedback -->
-                <form>
-                    <label for="name">Name: (optional)</label>
-                    <input type="text" id="name" name="name" value="Anon."><br>
-                    <label for="feedback">Feedback:</label>
-                    <textarea id=feedback name="feedback"></textarea><br>
-                    
-                    <button class="form-button" type="submit">Submit Feedback</button>
+            {% if admin %}
+            {% for element in feedbacks %}
+            <div class="row-container">
+                <div>Name:</div>
+                <div class="content">{{element['Name']}}</div>
+                <div>What did you like:</div>
+                <div class="content">{{element['Like']}}</div>
+                <div>What did you dislike:</div>
+                <div class="content">{{element['Dislike']}}</div>
+                <div>What would you like to see:</div>
+                <div class="content">{{element['See']}}</div>
                 </form>
             </div>
+            {% endfor %}
+            {% else %}
+            <div class="form-container">
+                <!-- a form to collect feedback -->
+                
+                <form action="/feedback.html" method="post">
+                    <label for="name">Name: (optional)</label>
+                    <input type="text" id="name" name="name" value="Anon."><br>
+                    <label for="like">What did you like:</label>
+                    <textarea id=like name="like"></textarea><br>
+                    <label for="dislike">What did you dislike:</label>
+                    <textarea id=dislike name="dislike"></textarea><br>
+                    <label for="see">What would you like to see:</label>
+                    <textarea id=see name="see"></textarea><br>
+                    
+                    <input type="submit" class="form-button" name="feedback" value="Submit Feedback">
+                </form>
+            </div>
+            {% endif %}
         </div>
 
         <footer class="foot">

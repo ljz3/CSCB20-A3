@@ -129,8 +129,11 @@ def grade():
     
 
 @app.route('/login.html',methods=['GET','POST'])
+@app.route('/login')
 def login():
     if request.method=='POST':
+        if request.form.get("signup"):
+            return render_template("signup.html")
         sql = """
 	    SELECT *
 	    FROM Login NATURAL JOIN Person
@@ -142,6 +145,8 @@ def login():
                     return render_template('grade.html', grade=grades)
                 else:
                     return render_template('index.html')
+    return render_template('login.html')
+        
 
 
 @app.route('/index.html')

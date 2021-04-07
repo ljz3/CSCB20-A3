@@ -25,13 +25,13 @@
             <div class="form-container">
                 <!-- grades -->
                 <div class="row-container">
-                  <div>Assignments</div>
-                  <div>Marks</div>
+                  <div class="content">Assignments</div>
+                  <div class="content">Marks</div>
               </div>
               {% for element in grade %}
               <div class="row-container">
-                  <div>{{element['Ass_id']}}</div>
-                  <div>{{element['Mark']}}</div>
+                  <div class="content">{{element['Ass_id']}}</div>
+                  <div class="content">{{element['Mark']}}</div>
               </div>
               {% endfor %}
             </div>

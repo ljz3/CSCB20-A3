@@ -50,10 +50,12 @@ body {
   padding: 20px;
   margin: 10px;
   border: #2980b9 1px solid;
+  border-radius: 15px;
 }
 
 .content {
-  margin: 5%;
+  margin-left: 5%;
+  margin-right: 5%;
   padding: 10px;
 }
 

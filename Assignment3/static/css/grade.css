@@ -45,17 +45,15 @@ body {
 .row-container {
   display: flex;
   flex-direction: row;
-  justify-content: center;
+  justify-content: space-between;
   flex-wrap: wrap;
   padding: 20px;
-  margin: 50px;
+  margin: 10px;
   border: #2980b9 1px solid;
-  border-radius: 15px;
-  box-shadow: 0 0 20px #2ecc71;
 }
 
 .content {
-  margin: 5px;
+  margin: 5%;
   padding: 10px;
 }
 

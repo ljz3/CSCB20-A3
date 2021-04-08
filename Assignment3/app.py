@@ -105,6 +105,8 @@ def logout():
     session['access_username'] = ''
     return render_template("logout.html")
 
+
+# when user goes to the grades page
 @app.route('/add_grade.html', methods=['GET', 'POST'])
 def add_grade():
     db = get_db()

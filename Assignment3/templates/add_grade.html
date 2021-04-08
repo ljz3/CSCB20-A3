@@ -7,15 +7,29 @@
         <title>Grade</title>
     </head>
     <body>
-            <form action = "/grade.html">
-                {% if isadmin %}
-                <input id="input_box" size="35"  type="text" name="Assignment" placeholder="Enter an assignment to add for">
-                <input id="input_box" size="35"  type="text" name="Name" placeholder="Enter an student Username to add to">
-                <input id="input_box" size="35"  type="text" name="Grade" placeholder="Enter student's grade">
-                <br>
-                <input type="submit" name="search_button" value="Enter Grade">
-                {% endif %}
-            </form>
+        <div class="navbar-container">
+            <!-- Navbar links -->
+            <a href="index.html">Home</a>
+            <a href="assignments.html">Assignment</a>
+            <a href="syllabus.html">Syllabus</a>
+            <a href="piazza.html">Piazza</a>
+            <a href="labs.html">Labs</a>
+            <a href="markus.html">MarkUs</a>
+            <a href="courseteam.html">Course Team</a>
+            <a href="feedback.html">Feedback</a>
+            <a href="remark.html">Remark</a>
+            <a href="grade.html">Grades</a>
+            <a href="login.html">Login</a>
+        </div>
+        <form action = "/add_grade.html">
+            {% if isadmin %}
+            <input id="input_box" size="35"  type="text" name="Assignment" placeholder="Enter an assignment to add for">
+            <input id="input_box" size="35"  type="text" name="Name" placeholder="Enter an student Username to add to">
+            <input id="input_box" size="35"  type="text" name="Grade" placeholder="Enter student's grade">
+            <br>
+            <input type="submit" name="search_button" value="Enter Grade">
+            {% endif %}
+        </form>
             
 
         <footer class="foot">

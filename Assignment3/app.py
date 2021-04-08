@@ -122,7 +122,7 @@ def add_grade():
     return render_template('add_grade.html', isadmin = session['isadmin'])
 
 @app.route('/grade')
-@app.route('/grade.html')
+@app.route('/grade.html', methods=['GET', 'POST'])
 def grade():
     db = get_db()
     db.row_factory = make_dicts

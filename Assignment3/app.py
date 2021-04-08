@@ -101,7 +101,7 @@ def remark_change():
 # when user goes to the logout page
 @app.route('/logout.html')
 def logout():
-    session['isadmin'] == None
+    session['isadmin'] = False
     session['access_username'] = ''
     return render_template("logout.html")
 
@@ -129,7 +129,6 @@ def grade():
     Assid = request.args.get('Assignment')
     grades = []
     grades_search=[]
-
     if Assid == None:
         # if user is instructor
         if session['isadmin'] == True:

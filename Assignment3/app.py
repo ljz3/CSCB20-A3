@@ -31,21 +31,24 @@ def close_connection(exception):
         db.close()    
 
 
+# helper function to remove remark request from db
 def remove_remark(user, ass_id, mark):
     db = get_db()
     db_cur = db.cursor()
-    #print("delete from Remarks where Username='"+user+"' and Ass_id='"+ass_id+"'")
+    # executes the sql commands
     db_cur.execute("delete from Remarks where Username='"+user+"' and Ass_id='"+ass_id+"'")
-    #print("update Grades set Mark="+mark+"where Username='"+user+"' and Ass_id='"+ass_id+"'")
     db_cur.execute("update Grades set Mark="+mark+" where Username='"+user+"' and Ass_id='"+ass_id+"'")
     db.commit()
 
+
+# helper function to add remark request to db
 def add_remark(user, name, ass_id, mark, reason):
     db = get_db()
     db_cur = db.cursor()
-    #print("insert into Remarks values ('"+ user +"','"+ name +"','"+ ass_id +"','"+ mark +"','"+ reason +"')")
+    # executes the sql commands
     db_cur.execute("insert into Remarks values ('"+ user +"','"+ name +"','"+ ass_id +"','"+ mark +"','"+ reason +"')")
     db.commit()
+
 
 def remark():
     db = get_db()
@@ -63,6 +66,8 @@ def remark():
         db.close()
         return render_template('remark.html', remarks=remarks_dict, admin=session['isadmin'])
 
+
+# default screen is login screen with user logged out
 @app.route('/')
 def default():
     session['access_username'] = ''
@@ -70,6 +75,7 @@ def default():
     return render_template('login.html')
 
 
+# when user goes to the remark page
 @app.route('/remark.html', methods=['GET', 'POST'])
 def remark_change():           
     if request.method == 'POST':
@@ -92,12 +98,15 @@ def remark_change():
     else:
         return remark()
 
+# when user goes to the logout page
 @app.route('/logout.html')
 def logout():
     session['isadmin'] == None
     session['access_username'] = ''
     return render_template("logout.html")
 
+
+# when user goes to the grades page
 @app.route('/grade')
 @app.route('/grade.html')
 def grade():
@@ -108,28 +117,33 @@ def grade():
     grades_search=[]
 
     if Assid == None:
+        # if user is instructor
         if session['isadmin'] == True:
             for studentGrade in query_db('select * from Grades'):
                 grades.append(studentGrade)
             db.close()
             return render_template('grade.html', grade=grades, admin=session['isadmin'])
+        # if user is student
         else:
             for studentGrade in query_db('select * from Grades where Username =? ' ,[session['access_username']]):
                 grades.append(studentGrade)
             db.close()
             return render_template('grade.html', grade=grades)
     else:
+        # if user is instructor
         if session['isadmin'] == True:
             for studentGrade in query_db('select * from Grades where Ass_id=?' , [Assid]):
                 grades.append(studentGrade)
             db.close()
             return render_template('grade.html', grade=grades, admin=session['isadmin'])
+        # if user is student
         else:
             grade = query_db('select * from Grades where Username==? and Ass_id=?',[session['access_username'],Assid], one=True)
             db.close()
             return render_template('grade.html', grade=[grade])
 
 
+# when user wants to login
 @app.route('/login.html',methods=['GET','POST'])
 @app.route('/login')
 def login():
@@ -153,8 +167,7 @@ def login():
     elif request.method=='GET':
         return render_template('login.html')
 
-    # return render_template('login.html')
-
+# when user wants to sign up
 @app.route('/signup.html',methods=['GET','POST'])
 def signup():
     print("here")
@@ -181,6 +194,7 @@ def signup():
         return render_template('signup.html')
     
 
+# helper function for user signup
 def add_user(username, password, name, type_of):
     db = get_db()
     db_cur = db.cursor()
@@ -204,13 +218,16 @@ def assignments():
 def courseteam():
     return render_template('courseteam.html')
 
+
+# helper function for adding feedback
 def add_feedback(name, like, dislike, see):
     db = get_db()
     db_cur = db.cursor()
-    #print("insert into Remarks values ('"+ user +"','"+ name +"','"+ ass_id +"','"+ mark +"','"+ reason +"')")
     db_cur.execute("insert into Feedbacks values ('"+ name +"','"+ like +"','"+ dislike +"','"+ see +"')")
     db.commit()
 
+
+# when user wants to go to feedback page
 @app.route('/feedback.html', methods=['GET','POST'])
 def feedback():
     db = get_db()

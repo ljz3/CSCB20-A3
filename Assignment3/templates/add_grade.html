@@ -21,7 +21,7 @@
         <a href="login.html">Login</a>
     </div>
     <body>
-        <form action = "/add_grade.html" class="body-container">
+        <form action = "/add_grade.html" method="POST" class="body-container">
             {% if isadmin %}
             <input id="input_box" size="35"  type="text" name="Assignment" placeholder="Enter an assignment to add for">
             <input id="input_box" size="35"  type="text" name="Name" placeholder="Enter an student Username to add to">

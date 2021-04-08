@@ -141,4 +141,21 @@ form {
         margin: 20px 30px;
     }
 
+    .row-container {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        flex-wrap: wrap;
+        padding: 20px;
+        margin: 50px;
+        border: #2980b9 1px solid;
+        border-radius: 15px;
+        box-shadow: 0 0 20px #2ecc71;
+    }
+
+    form {
+        display: flex;
+        flex-direction: column;
+    }
+
   }

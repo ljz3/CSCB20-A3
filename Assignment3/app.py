@@ -70,7 +70,7 @@ def remark():
 
 @app.route('/')
 def default():
-    return render_template('index.html')
+    return render_template('login.html')
 
 
 @app.route('/remark.html', methods=['GET', 'POST'])
@@ -140,7 +140,6 @@ def login():
         elif request.form.get("signin"):
             user = query_db("SELECT Username, Password, type FROM Login NATURAL JOIN Person WHERE Username = ? AND Password = ?",
                             [request.form['username'], request.form['password']])
-
             if user is not None:
                 return render_template('index.html')
             else:

@@ -33,15 +33,10 @@
             {% if admin %}
             {% for element in feedbacks %}
             <div class="row-container">
-                <div>Name:</div>
-                <div class="content">{{element['Name']}}</div>
-                <div>What did you like:</div>
-                <div class="content">{{element['Like']}}</div>
-                <div>What did you dislike:</div>
-                <div class="content">{{element['Dislike']}}</div>
-                <div>What would you like to see:</div>
-                <div class="content">{{element['See']}}</div>
-                </form>
+                <div class="content">Name: {{element['Name']}}</div>
+                <div class="content">What did you like: {{element['Like']}}</div>
+                <div class="content">What did you dislike: {{element['Dislike']}}</div>
+                <div class="content">What would you like to see: {{element['See']}}</div>
             </div>
             {% endfor %}
             {% else %}

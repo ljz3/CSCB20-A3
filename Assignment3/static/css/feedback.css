@@ -113,6 +113,48 @@ input[type="text"], textarea{
     font-size: 20px;
 }
 
+.row-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: wrap;
+    padding: 20px;
+    margin: 50px;
+    border: #2980b9 1px solid;
+    border-radius: 15px;
+    box-shadow: 0 0 20px #2ecc71;
+}
+
+.content {
+    margin: 5px;
+    padding: 10px;
+    text-align: center;
+}
+
+form {
+    display: flex;
+    flex-direction: row;
+}
+
+[type=submit] {
+    text-decoration: none;
+    padding: 5px;
+    border-radius: 15px;
+    color: #ecf0f1;
+    background-color: #2980b9;
+    transition: 1s;
+    cursor: pointer;
+}
+
+[type=submit]:hover {
+    background-color: #ecf0f1;
+    border: none;
+    color: #2ecc71;
+    border-radius: 10px;
+    box-shadow: 0 0 10px #2ecc71;
+    font-size: 20px;
+}
+
 /*-----------------------Footer CSS-----------------------*/
 
 .footer-container {

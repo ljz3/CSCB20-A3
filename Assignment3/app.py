@@ -152,20 +152,39 @@ def login():
 
 @app.route('/signup.html',methods=['GET','POST'])
 def signup():
+    print("here")
     db = get_db()
     db.row_factory = make_dicts
     signup_dict = []
     if request.method=='POST':
-        return 1
-        # if request.form.get('feedback') == 'Submit Feedback':
-        #     name = request.form.get('name')
-        #     like = request.form['like']
-        #     dislike = request.form['dislike']
-        #     see = request.form['see']
-        #     add_feedback(name, like, dislike, see)
+        if request.form.get("su_student"):
+            username = request.form.get('username')
+            password = request.form.get('password')
+            name = request.form.get('name')
+            add_user(username, password, name, '0')
+            session['isadmin'] == False
+            session['access_username'] = username
+        elif request.form.get("su_instructor"):
+            username = request.form.get('username')
+            password = request.form.get('password')
+            name = request.form.get('name')
+            add_user(username, password, name, '1')
+            session['isadmin'] == True
+            session['access_username'] = username
+        return render_template("login.html")
     elif request.method=='GET':
         return render_template('signup.html')
     
+
+def add_user(username, password, name, type_of):
+    db = get_db()
+    db_cur = db.cursor()
+    db_cur.execute("insert into Login values ('"+ username +"','"+ password +"')")
+    db.commit()
+    db = get_db()
+    db_cur = db.cursor()
+    db_cur.execute("insert into Person values ('"+ username +"','"+ name +"','"+ type_of +"')")
+    db.commit()
 
 
 @app.route('/index.html')

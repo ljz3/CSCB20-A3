@@ -141,7 +141,7 @@ def login():
             user = query_db("SELECT Username, Password, type FROM Login NATURAL JOIN Person WHERE Username = ? AND Password = ?",
                             [request.form['username'], request.form['password']])
 
-            if user is None:
+            if user is not None:
                 return render_template('index.html')
             else:
                 return request.form['username'] + request.form['password'] 

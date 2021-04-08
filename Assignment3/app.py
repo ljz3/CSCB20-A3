@@ -6,7 +6,7 @@ app = Flask(__name__)
 
 access_username = ''
 isadmin = True
-
+# print('here')
 #access_username = 'student_2'
 #isadmin = False
 
@@ -104,7 +104,7 @@ def grade():
     Assid = request.args.get('Assignment')
     grades = []
     grades_search=[]
-    print(Assid)
+    print(isadmin)
     if Assid == None:
         if isadmin == True:
             for studentGrade in query_db('select * from Grades'):
@@ -138,22 +138,16 @@ def login():
         if request.form.get("signup"):
             return render_template("signup.html")
         elif request.form.get("signin"):
-            user = query_db("SELECT Username, Password, type FROM Login NATURAL JOIN Person WHERE Username = ? AND Password = ?",
+            user = query_db("SELECT * FROM Login NATURAL JOIN Person WHERE Username = ? AND Password = ?",
                             [request.form['username'], request.form['password']])
-            if user is not None:
+            
+            if bool(user) is True:
+                access_username = request.form['username']
+                isadmin = bool(user[0]['type'])
+                print(isadmin)
                 return render_template('index.html')
             else:
-                return request.form['username'] + request.form['password'] 
-            # sql = """
-            # SELECT Username, Password, type
-            # FROM Login NATURAL JOIN Person
-            # """
-            # results = query_db(sql, args=(), one=False)
-            # for result in results:
-            #     if result[1]==request.form['Username']:
-            #         if result[2]==request.form['Password']:
-            #             return render_template("signup.html")
-            # return render_template("index.html")
+                return render_template('login.html')
     elif request.method=='GET':
         return render_template('login.html')
 

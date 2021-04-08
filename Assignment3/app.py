@@ -65,6 +65,8 @@ def remark():
 
 @app.route('/')
 def default():
+    session['access_username'] = ''
+    session['isadmin'] = False
     return render_template('login.html')
 
 
@@ -138,7 +140,6 @@ def login():
             
             if bool(user) is True:
                 session['access_username'] = request.form['username']
-                session['username'] = session['access_username']
                 session['isadmin'] = bool(user[0]['type'])
                 print(session['isadmin'])
                 return render_template('index.html')

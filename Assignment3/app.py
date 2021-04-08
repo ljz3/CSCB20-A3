@@ -105,8 +105,20 @@ def logout():
     session['access_username'] = ''
     return render_template("logout.html")
 
+@app.route('/add_grade.html', methods=['GET', 'POST'])
+def add_grade():
+    db = get_db()
+    db.row_factory = make_dicts
+    if request.method == 'POST':
+        Assid = request.form.get('Assignment')
+        Name = request.form.get('Name')
+        Grade = request.form.get('Grade')
 
-# when user goes to the grades page
+        db_cur = db.cursor()
+        db_cur.execute("insert into Grades values ('"+ Name +"','"+ Assid +"','"+ Grade +"')")
+        db.commit()
+    return render_template('add_grade.html', isadmin = session['isadmin'])
+
 @app.route('/grade')
 @app.route('/grade.html')
 def grade():

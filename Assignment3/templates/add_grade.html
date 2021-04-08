@@ -3,7 +3,7 @@
     <head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta charset="UTF-8">
-        <link rel="stylesheet" href="../static/css/grade.css">
+        <link rel="stylesheet" href="../static/css/add_grade.css">
         <title>Grade</title>
     </head>
     <body>
@@ -21,38 +21,16 @@
             <a href="grade.html">Grades</a>
             <a href="login.html">Login</a>
         </div>
-        <div class="body-container">
-            <div class="form-container">
-                <!-- grades -->
-                <div class="row-container">
-                    {% if admin %}
-                        <h2><div class="content">Student Name</div></h2>
-                    {% endif %}
-                    <h2><div class="content">Assignments</div></h2>
-                    <h2><div class="content">Marks</div></h2>
-              </div>
-              {% for element in grade %}
-              <div class="row-container">
-                {% if admin %}
-                    <div class="content">{{element['Username']}}</div>
-                {% endif %}
-                  <div class="content">{{element['Ass_id']}}</div>
-                  <div class="content">{{element['Mark']}}</div>
-              </div>
-              {% endfor %}
-            </div>
-        </div>
-        <br>
-            <form action = "/grade">
-                <input id="input_box" size="35"  type="text" name="Assignment" placeholder="Enter an assignment to search for">
-                <br>
-                <input type="submit" name="search_button" value="Search">
-            </form>
-            <form action = "/add_grade.html">
-                {% if admin %}
-                    <input type="submit" name="submit_grade_button" value="Enter Grade">
-                {% endif %}
-            </form>
+        <form action = "/add_grade.html">
+            {% if isadmin %}
+            <input id="input_box" size="35"  type="text" name="Assignment" placeholder="Enter an assignment to add for">
+            <input id="input_box" size="35"  type="text" name="Name" placeholder="Enter an student Username to add to">
+            <input id="input_box" size="35"  type="text" name="Grade" placeholder="Enter student's grade">
+            <br>
+            <input type="submit" name="search_button" value="Enter Grade">
+            {% endif %}
+        </form>
+            
 
         <footer class="foot">
             <div class="footer-container">

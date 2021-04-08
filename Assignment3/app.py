@@ -92,6 +92,11 @@ def remark_change():
     else:
         return remark()
 
+@app.route('/logout.html')
+def logout():
+    session['isadmin'] == None
+    session['access_username'] = ''
+    return render_template("logout.html")
 
 @app.route('/grade')
 @app.route('/grade.html')

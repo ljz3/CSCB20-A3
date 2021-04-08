@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta charset="UTF-8">
+        <link rel="stylesheet" href="../static/css/add_grade.css">
+        <title>Grade</title>
+    </head>
+    <body>
+            <form action = "/grade.html">
+                {% if isadmin %}
+                <input id="input_box" size="35"  type="text" name="Assignment" placeholder="Enter an assignment to add for">
+                <input id="input_box" size="35"  type="text" name="Name" placeholder="Enter an student Username to add to">
+                <input id="input_box" size="35"  type="text" name="Grade" placeholder="Enter student's grade">
+                <br>
+                <input type="submit" name="search_button" value="Enter Grade">
+                {% endif %}
+            </form>
+            
+
+        <footer class="foot">
+            <div class="footer-container">
+                <!-- Footer content -->
+                <div class="footer-content"><hr>This website was made as an assignment for the course CSCB20 at University of Toronto Scarborough Campus</div>
+                <div class="footer-content"><a href="https://web.cs.toronto.edu/" target="_blank">Faculty of Computer Science at UofT</a></div>
+                <div class="footer-content">Copyright&copy 2021. All Rights Reserved.</div>
+                <div class="footer-content">Made by Jawad Arshad, Jiazheng Li and Yuehai Zhou</div>
+            </div>
+        </footer>
+    </body>
+</html>

@@ -70,7 +70,7 @@ def remark():
 
 @app.route('/')
 def default():
-    return render_template('login.html')
+    return render_template('index.html')
 
 
 @app.route('/remark.html', methods=['GET', 'POST'])
@@ -126,25 +126,35 @@ def grade():
             grade = query_db('select * from Grades where Username==? and Ass_id=?',[access_username,Assid], one=True)
             db.close()
             return render_template('grade.html', grade=[grade])
-    
+
 
 @app.route('/login.html',methods=['GET','POST'])
 @app.route('/login')
 def login():
+    db = get_db()
+    db.row_factory = make_dicts
+    login_dict = []
     if request.method=='POST':
         if request.form.get("signup"):
             return render_template("signup.html")
         elif request.form.get("signin"):
-            sql = """
-            SELECT Username, Password, type
-            FROM Login NATURAL JOIN Person
-            """
-            results = query_db(sql, args=(), one=False)
-            for result in results:
-                if result[1]==request.form['Username']:
-                    if result[2]==request.form['Password']:
-                        render_template("signup.html")
-            return render_template("index.html")
+            user = query_db("SELECT Username, Password, type FROM Login NATURAL JOIN Person WHERE Username = ? AND Password = ?",
+                            [request.form['username'], request.form['password']])
+
+            if user is None:
+                return render_template('index.html')
+            else:
+                return request.form['username'] + request.form['password'] 
+            # sql = """
+            # SELECT Username, Password, type
+            # FROM Login NATURAL JOIN Person
+            # """
+            # results = query_db(sql, args=(), one=False)
+            # for result in results:
+            #     if result[1]==request.form['Username']:
+            #         if result[2]==request.form['Password']:
+            #             return render_template("signup.html")
+            # return render_template("index.html")
     elif request.method=='GET':
         return render_template('login.html')
 
@@ -152,8 +162,17 @@ def login():
 
 @app.route('/signup.html',methods=['GET','POST'])
 def signup():
+    db = get_db()
+    db.row_factory = make_dicts
+    signup_dict = []
     if request.method=='POST':
-        return 'signed up'
+        return 1
+        # if request.form.get('feedback') == 'Submit Feedback':
+        #     name = request.form.get('name')
+        #     like = request.form['like']
+        #     dislike = request.form['dislike']
+        #     see = request.form['see']
+        #     add_feedback(name, like, dislike, see)
     elif request.method=='GET':
         return render_template('signup.html')
     

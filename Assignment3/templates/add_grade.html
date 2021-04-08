@@ -6,22 +6,22 @@
         <link rel="stylesheet" href="../static/css/add_grade.css">
         <title>Grade</title>
     </head>
+    <div class="navbar-container">
+        <!-- Navbar links -->
+        <a href="index.html">Home</a>
+        <a href="assignments.html">Assignment</a>
+        <a href="syllabus.html">Syllabus</a>
+        <a href="piazza.html">Piazza</a>
+        <a href="labs.html">Labs</a>
+        <a href="markus.html">MarkUs</a>
+        <a href="courseteam.html">Course Team</a>
+        <a href="feedback.html">Feedback</a>
+        <a href="remark.html">Remark</a>
+        <a href="grade.html">Grades</a>
+        <a href="login.html">Login</a>
+    </div>
     <body>
-        <div class="navbar-container">
-            <!-- Navbar links -->
-            <a href="index.html">Home</a>
-            <a href="assignments.html">Assignment</a>
-            <a href="syllabus.html">Syllabus</a>
-            <a href="piazza.html">Piazza</a>
-            <a href="labs.html">Labs</a>
-            <a href="markus.html">MarkUs</a>
-            <a href="courseteam.html">Course Team</a>
-            <a href="feedback.html">Feedback</a>
-            <a href="remark.html">Remark</a>
-            <a href="grade.html">Grades</a>
-            <a href="login.html">Login</a>
-        </div>
-        <form action = "/add_grade.html">
+        <form action = "/add_grade.html" class="body-container">
             {% if isadmin %}
             <input id="input_box" size="35"  type="text" name="Assignment" placeholder="Enter an assignment to add for">
             <input id="input_box" size="35"  type="text" name="Name" placeholder="Enter an student Username to add to">

@@ -3,12 +3,7 @@ from flask import Flask, render_template, request, g, escape, url_for, redirect,
 
 DATABASE = './assignment3.db'
 app = Flask(__name__)
-
-access_username = ''
-isadmin = True
-# print('here')
-#access_username = 'student_2'
-#isadmin = False
+app.secret_key = 'any random string'
 
 def get_db():
     db = getattr(g, '_database', None)
@@ -57,16 +52,16 @@ def remark():
     db.row_factory = make_dicts
 
     remarks_dict = []
-    if isadmin == True:
+    if session['isadmin'] == True:
         for want_remark in query_db('select * from Remarks'):
             remarks_dict.append(want_remark)
         db.close()
-        return render_template('remark.html', remarks=remarks_dict, admin=isadmin)
+        return render_template('remark.html', remarks=remarks_dict, admin=session['isadmin'])
     else:
-        for want_remark in query_db("select Username, name, Ass_id, Mark from Grades natural join Person where username ='" + access_username +"'"):
+        for want_remark in query_db("select Username, name, Ass_id, Mark from Grades natural join Person where username ='" + session['access_username'] +"'"):
             remarks_dict.append(want_remark)
         db.close()
-        return render_template('remark.html', remarks=remarks_dict, admin=isadmin)
+        return render_template('remark.html', remarks=remarks_dict, admin=session['isadmin'])
 
 @app.route('/')
 def default():
@@ -77,7 +72,7 @@ def default():
 def remark_change():           
     if request.method == 'POST':
         if request.form.get('Remark') == 'Remark':
-            if isadmin == True:
+            if session['isadmin'] == True:
                 user = request.form.get('Username')
                 ass_id = request.form.get('Ass_id')
                 new_mark = request.form.get('new_mark')
@@ -104,26 +99,26 @@ def grade():
     Assid = request.args.get('Assignment')
     grades = []
     grades_search=[]
-    print(isadmin)
+
     if Assid == None:
-        if isadmin == True:
+        if session['isadmin'] == True:
             for studentGrade in query_db('select * from Grades'):
                 grades.append(studentGrade)
             db.close()
-            return render_template('grade.html', grade=grades, admin=isadmin)
+            return render_template('grade.html', grade=grades, admin=session['isadmin'])
         else:
-            for studentGrade in query_db('select * from Grades where Username =? ' ,[access_username]):
+            for studentGrade in query_db('select * from Grades where Username =? ' ,[session['access_username']]):
                 grades.append(studentGrade)
             db.close()
             return render_template('grade.html', grade=grades)
     else:
-        if isadmin == True:
+        if session['isadmin'] == True:
             for studentGrade in query_db('select * from Grades where Ass_id=?' , [Assid]):
                 grades.append(studentGrade)
             db.close()
-            return render_template('grade.html', grade=grades, admin=isadmin)
+            return render_template('grade.html', grade=grades, admin=session['isadmin'])
         else:
-            grade = query_db('select * from Grades where Username==? and Ass_id=?',[access_username,Assid], one=True)
+            grade = query_db('select * from Grades where Username==? and Ass_id=?',[session['access_username'],Assid], one=True)
             db.close()
             return render_template('grade.html', grade=[grade])
 
@@ -142,9 +137,10 @@ def login():
                             [request.form['username'], request.form['password']])
             
             if bool(user) is True:
-                access_username = request.form['username']
-                isadmin = bool(user[0]['type'])
-                print(isadmin)
+                session['access_username'] = request.form['username']
+                session['username'] = session['access_username']
+                session['isadmin'] = bool(user[0]['type'])
+                print(session['isadmin'])
                 return render_template('index.html')
             else:
                 return render_template('login.html')
@@ -195,11 +191,11 @@ def feedback():
     db = get_db()
     db.row_factory = make_dicts
     feedback_dict = []
-    if isadmin == True:
+    if session['isadmin'] == True:
         for want_remark in query_db('select * from Feedbacks'):
             feedback_dict.append(want_remark)
         db.close()
-        return render_template('feedback.html', feedbacks=feedback_dict, admin=isadmin)
+        return render_template('feedback.html', feedbacks=feedback_dict, admin=session['isadmin'])
     else:
         if request.method == 'POST':
             if request.form.get('feedback') == 'Submit Feedback':
@@ -208,7 +204,7 @@ def feedback():
                 dislike = request.form['dislike']
                 see = request.form['see']
                 add_feedback(name, like, dislike, see)
-    return render_template('feedback.html', feedbacks=feedback_dict, admin=isadmin)
+    return render_template('feedback.html', feedbacks=feedback_dict, admin=session['isadmin'])
 
 @app.route('/labs.html')
 def labs():

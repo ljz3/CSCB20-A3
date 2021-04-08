@@ -131,10 +131,6 @@ input[type="text"], textarea{
     text-align: center;
 }
 
-form {
-    display: flex;
-    flex-direction: row;
-}
 
 [type=submit] {
     text-decoration: none;
